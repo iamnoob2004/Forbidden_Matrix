@@ -91,6 +91,15 @@ struct pattern: vector<pair<int,int>> {
             cout << '\n';
         }
     }
+    void input() {
+        int n, m; cin >> n >> m;
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) {
+                char c; cin >> c;
+                if (c == '#') push_back({i, j});
+            }
+        }
+    }
     vector<pattern> extend() {
         shift();
         sort();
@@ -388,28 +397,8 @@ void bfs_acyclic(int N) {
 
 void amano_hina_is_the_goat(){
     int n; cin >> n;
-    bfs(n);
+    bfs_acyclic(n);
     return;
-    /*
-    pattern P;
-    P.push_back({0, 0});
-    P.push_back({0, 1});
-    P.push_back({1, 0});
-    P.push_back({1, 2});
-    P.shift();
-    //P.print();
-    P.rotate();
-    //P.print();
-    P.flip();
-    //P.print();
-    P.canonical();
-    //P.print();
-    vector<pattern> vec = P.extend();
-    for (auto Q: vec) {
-        Q.print();
-        cout << "\n";
-    }
-    */
     pattern P;
     P.push_back({0, 0});
     queue<pattern> q;
@@ -440,25 +429,6 @@ void amano_hina_is_the_goat(){
     for (int i = 1; i <= N; ++i) {
         cout << i << ' ' << cnt[i] << "\n";
     }
-    /*
-    for (int i = 1; i <= 6; ++i) {
-        vector<pattern> new_vec;
-        for (auto P: vec) {
-            vector<pattern> vec2 = P.extend();
-            for (auto Q: vec2) new_vec.push_back(Q);
-        }
-        sort(new_vec.begin(), new_vec.end());
-        new_vec.resize(unique(new_vec.begin(), new_vec.end()) - new_vec.begin());
-        cout << i + 1 << ' ' << new_vec.size() << "\n";
-        
-        for (auto P: new_vec) {
-            P.print();
-            cout << "\n";
-        }
-        
-        vec = new_vec;
-    }
-    */
 }
 
 signed main(){
