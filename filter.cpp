@@ -13,8 +13,8 @@ using namespace std;
 
 
 void _main(){
-    ifstream in("all_acyclic_patterns/all_acyclic_pattern_weight_8.txt");
-    ifstream filter("Pach_Tardos/Pach_Tardos_max_8.txt");
+    ifstream in("Pach_Tardos/exclude_Pach_Tardos_weight_8.txt");
+    ifstream filter("outstanding_weight_6_patterns/contains_outstanding_pattern_weight_8.txt");
 
     assert(in && filter);
 
@@ -36,9 +36,25 @@ void _main(){
 
     vector<pattern> all_filter;
 
+    /*
     int h, w;
     while (filter >> h >> w) {
 		pattern P;
+    	for (int i = 0; i < h; ++i) {
+    		string s; filter >> s;
+    		for (int j = 0; j < w; ++j) {
+    			if (s[j] == '#') P.push_back({i, j});
+    		}
+    	}
+    	all_filter.push_back(P);
+    }
+    */
+
+    filter >> n;
+    for (int _ = 0; _ < n; ++_) {
+    	int id; filter >> id;
+    	int h, w; filter >> h >> w;
+    	pattern P;
     	for (int i = 0; i < h; ++i) {
     		string s; filter >> s;
     		for (int j = 0; j < w; ++j) {

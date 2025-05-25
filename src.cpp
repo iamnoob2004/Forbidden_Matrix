@@ -94,9 +94,45 @@ void search_Pach_Tardos(int N) {
     }
 }
 
+void bfs_special(vector<pattern> src, int s, int N) {
+    vector<pattern> vec = src;
+    for (int i = s; i <= N - 1; ++i) {
+        vector<pattern> new_vec;
+        for (auto P: vec) {
+            vector<pattern> vec2 = P.extend();
+            for (auto Q: vec2) new_vec.push_back(Q);
+        }
+        sort(new_vec.begin(), new_vec.end());
+        new_vec.resize(unique(new_vec.begin(), new_vec.end()) - new_vec.begin());
+        vec = new_vec;
+    }
+    cout << vec.size() << "\n";
+    for (int i = 0; i < vec.size(); ++i) {
+        cout << i << '\n';
+        vec[i].print();
+        cout << '\n';
+    }
+}
+
 void _main(){
+    pattern S0, S1;
+    S0.push_back({0, 0});
+    S0.push_back({0, 2});
+    S0.push_back({1, 0});
+    S0.push_back({1, 3});
+    S0.push_back({2, 1});
+    S0.push_back({2, 3});
+
+    S1.push_back({0, 0});
+    S1.push_back({0, 2});
+    S1.push_back({1, 1});
+    S1.push_back({1, 3});
+    S1.push_back({2, 0});
+    S1.push_back({2, 3});
+
     int n; cin >> n;
-    search_Pach_Tardos(n);
+    bfs_special({S0, S1}, 6, n);
+    
     return;
 }
 
